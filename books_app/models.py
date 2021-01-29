@@ -26,10 +26,10 @@ class Book(db.Model):
     genres = db.relationship('Genre', secondary='book_genre', back_populates='books')
 
     def __str__(self):
-        return f'<Book: {self.title}>'
+        return f'<Book: {self.title}, Audience: {self.audience}>'
 
     def __repr__(self):
-        return f'<Book: {self.title}>'
+        return f'<Book: {self.title}, Audience: {self.audience}>'
 
 class Author(db.Model):
     """Author model."""
@@ -38,10 +38,10 @@ class Author(db.Model):
     books = db.relationship('Book', back_populates='author')
 
     def __str__(self):
-        return f'<Author: {self.name}>'
+        return f'<Author: {self.name}, Books: {self.books}>'
 
     def __repr__(self):
-        return f'<Author: {self.name}>'
+        return f'<Author: {self.name}, Books: {self.books}>'
 
 class Genre(db.Model):
     """Genre model."""
@@ -50,10 +50,10 @@ class Genre(db.Model):
     books = db.relationship('Book', secondary='book_genre', back_populates='genres')
 
     def __str__(self):
-        return f'<Genre: {self.name}>'
+        return f'<Genre: {self.name}, Books: {self.books}>'
 
     def __repr__(self):
-        return f'<Genre: {self.name}>'
+        return f'<Genre: {self.name}, Books: {self.books}>'
 
 book_genre_table = db.Table('book_genre',
     db.Column('book_id', db.Integer, db.ForeignKey('book.id')),
